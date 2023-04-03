@@ -14,9 +14,16 @@ namespace ariel
     class Game
     {
     private:
-    int remainingCards;
         Player p1;
         Player p2;
+        std::vector<Card> centerDeck;
+        std::vector<Card> spoilsOfWar;
+        bool gameOver;
+        bool war;
+        void initializeGame(Player &p1, Player &p2);
+        void shuffleDesk(std::vector<Card> &deck);
+        void dealCards(std::vector<Card> &deck, Player &p1, Player &p2);
+        void handleWar(Player p1, Player p2, int cardsToDraws);
 
     public:
         Game(Player p1_, Player p2_);

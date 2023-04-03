@@ -12,13 +12,37 @@ namespace ariel
 
     class Card
     {
-    private:
-        string shape;
-        int number;
-        string name;
-        // Add an array that includes all the remaining cards that exists to the Card - Im not sure if I need to do this right now or in onther time
     public:
-        Card(string s, int num, string name);        
+        enum class Suit
+        {
+            HEARTS,
+            DIAMONDS,
+            CLUBS,
+            SPADES
+        };
+        enum class Rank
+        {
+            ACE = 1,
+            TWO,
+            THREE,
+            FOUR,
+            FIVE,
+            SIX,
+            SEVEN,
+            EIGHT,
+            NINE,
+            TEN,
+            JACK,
+            QUEEN,
+            KING
+        };
+        Card(Rank rank, Suit suit);
+        int GetRankValue() const;
+        Suit GetSuitValue() const;
+
+    private:
+        Rank myRank;
+        Suit mySuit;
     };
 }
 #endif

@@ -5,24 +5,32 @@
 using namespace std;
 
 #include "player.hpp"
+#include "card.hpp"
 namespace ariel
 {
 
-    Player::Player(std::string n)
-    {
-        this->name = n;
-    };
+    Player::Player(std::string name) : myName(name), myStack(), myTaken(){};
 
+    void Player::addToStack(const vector<Card> &cards)
+    {
+        myStack.insert(myStack.end(), cards.begin(), cards.end());
+    }
+    void Player::addCard(const Card &card)
+    {
+        myStack.push_back(card);
+    }
     int Player::stacksize()
     {
-        return 26;
+        return myStack.size();
     };
+
     int Player::cardesTaken()
     {
-        return 0;
+        return myTaken.size();
     };
+
     string Player::getName()
     {
-        return name;
+        return myName;
     }
 }
