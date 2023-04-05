@@ -42,9 +42,67 @@ namespace ariel
             throw std::logic_error("Unkown card rank");
         }
     }
+
+    string Card::rank_to_string()
+    {
+        switch (myRank)
+        {
+        case Card::Rank::TWO:
+            return "Two";
+        case Card::Rank::THREE:
+            return "Three";
+        case Card::Rank::FOUR:
+            return "Four";
+        case Card::Rank::FIVE:
+            return "Five";
+        case Card::Rank::SIX:
+            return "Six";
+        case Card::Rank::SEVEN:
+            return "Seven";
+        case Card::Rank::EIGHT:
+            return "Eight";
+        case Card::Rank::NINE:
+            return "Nine";
+        case Card::Rank::TEN:
+            return "Ten";
+        case Card::Rank::JACK:
+            return "Jack";
+        case Card::Rank::QUEEN:
+            return "Queen";
+        case Card::Rank::KING:
+            return "King";
+        case Card::Rank::ACE:
+            return "Ace";
+        default:
+            return "";
+        }
+    }
+
+
+ string Card::suit_to_string()
+    {
+        switch (mySuit)
+        {
+        case Card::Suit::HEARTS:
+            return "HEARTS";
+        case Card::Suit::DIAMONDS:
+            return "DIAMONDS";
+        case Card::Suit::CLUBS:
+            return "CLUBS";
+        case Card::Suit::SPADES:
+            return "SPADES";
+        default:
+            return "";
+        }
+    }
+
     Card::Suit Card::GetSuitValue() const
     {
         return mySuit;
     }
-
+    void Card::printCard()
+    {
+        cout << rank_to_string() << endl;
+        cout << suit_to_string() << endl;
+    }
 }

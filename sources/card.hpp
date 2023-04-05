@@ -22,7 +22,7 @@ namespace ariel
         };
         enum class Rank
         {
-            ACE = 1,
+            ACE,
             TWO,
             THREE,
             FOUR,
@@ -39,6 +39,9 @@ namespace ariel
         Card(Rank rank, Suit suit);
         int GetRankValue() const;
         Suit GetSuitValue() const;
+        void printCard();
+        string rank_to_string();
+        string suit_to_string();
 
     private:
         Rank myRank;

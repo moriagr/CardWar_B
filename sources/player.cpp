@@ -18,6 +18,13 @@ namespace ariel
     void Player::addCard(const Card &card)
     {
         myStack.push_back(card);
+        // for (std::vector<Card>::size_type i = 0; i < myStack.size(); i++)
+        // {
+        //     cout << "Player's cards:" << endl;
+        //     myStack[i].printCard();
+        // }
+        // cout << myStack.size() << endl;
+
     }
     int Player::stacksize()
     {
@@ -32,5 +39,16 @@ namespace ariel
     string Player::getName()
     {
         return myName;
+    }
+
+    void Player::printCards()
+    {
+        cout << "Player's cards:" << endl;
+        // cout << myStack.size() << endl;
+        for (std::vector<Card>::size_type i = 0; i < myStack.size(); i++)
+        {
+            myStack[i].printCard();
+            cout << "" << endl;
+        }
     }
 }

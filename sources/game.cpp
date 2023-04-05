@@ -30,10 +30,11 @@ namespace ariel
         shuffleDesk(deck);
         dealCards(deck, p1, p2);
         gameOver = false;
+        p1.printCards();
     }
-    void dealCards(std::vector<Card> &deck, Player &p1, Player &p2)
+    void Game::dealCards(std::vector<Card> &deck, Player &p1, Player &p2)
     {
-        for (int i = 0; i < 52; i++)
+        for (std::vector<Card>::size_type i = 0; i < 52; i++)
         {
             if (i % 2 == 0)
             {
@@ -41,16 +42,16 @@ namespace ariel
             }
             else
             {
-                p1.addCard(deck[i]);
+                p2.addCard(deck[i]);
             }
         }
     }
     void Game::shuffleDesk(std::vector<Card> &deck)
     {
         std::srand(std::time(nullptr));
-        for (int i = deck.size() - 1; i > 0; i--)
+        for (std::vector<Card>::size_type i = deck.size() - 1; i > 0; i--)
         {
-            int randIndex = std::rand() % (i + 1);
+            std::vector<Card>::size_type randIndex = (std::vector<Card>::size_type)std::rand() % (i + 1);
             Card temp = deck[i];
             deck[i] = deck[randIndex];
             deck[randIndex] = temp;
@@ -76,11 +77,11 @@ namespace ariel
     {
         if (p1.cardesTaken() > p2.cardesTaken())
         {
-            printf("%s\n", p1.getName());
+            cout << p1.getName() << endl;
         }
         else if (p1.cardesTaken() < p2.cardesTaken())
         {
-            printf("%s\n", p2.getName());
+            cout << p2.getName() << endl;
         }
         else
         {

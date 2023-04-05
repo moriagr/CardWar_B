@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <vector>
 using namespace std;
-// #include "card.hpp"
+#include "card.hpp"
 
 namespace ariel
 {
@@ -22,6 +22,7 @@ namespace ariel
         string getName();
         void addToStack(const vector<Card> &cards);
         void addCard(const Card &card);
+        void printCards();
 
     private:
         string myName;
