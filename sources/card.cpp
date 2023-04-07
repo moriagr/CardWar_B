@@ -13,7 +13,7 @@ namespace ariel
         switch (myRank)
         {
         case Rank::ACE:
-            return 1;
+            return 14;
         case Rank::TWO:
             return 2;
         case Rank::THREE:

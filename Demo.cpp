@@ -23,10 +23,10 @@ int main()
   Player p2("Bob");
 
   Game game(p1, p2);
-  cout << "p1" << endl;
-  p1.printCards();
-  cout << "p2" << endl;
-  p2.printCards();
+  // cout << "p1" << endl;
+  // p1.printCards();
+  // cout << "p2" << endl;
+  // p2.printCards();
   for (int i = 0; i < 5; i++)
   {
     game.playTurn();

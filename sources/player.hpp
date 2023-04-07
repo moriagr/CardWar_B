@@ -21,8 +21,10 @@ namespace ariel
         int cardesTaken();
         string getName();
         void addToStack(const vector<Card> &cards);
-        void addCard(const Card &card);
+        void addCardToStack(const Card &card);
+        void addCardToTaken(const Card &card);
         void printCards();
+        Card takeCard();
 
     private:
         string myName;

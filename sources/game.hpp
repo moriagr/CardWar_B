@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <stack>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -18,11 +19,14 @@ namespace ariel
         Player p2;
         std::vector<Card> centerDeck;
         std::vector<Card> spoilsOfWar;
+        std::stack<std::string> turnLog;
         bool gameOver;
         bool war;
         void initializeGame(Player &p1, Player &p2);
         void shuffleDesk(std::vector<Card> &deck);
         void dealCards(std::vector<Card> &deck, Player &p1, Player &p2);
+        void addLog(Card &cWinner, Card &cLoser, Player &winner, Player &loser);
+        void addWarLog(std::vector<Card> &cWinner, std::vector<Card> &cLoser, Player &winner, Player &loser);
         void handleWar(Player p1, Player p2, int cardsToDraws);
 
     public:
