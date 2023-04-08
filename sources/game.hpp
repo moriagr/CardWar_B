@@ -26,7 +26,7 @@ namespace ariel
         void shuffleDesk(std::vector<Card> &deck);
         void dealCards(std::vector<Card> &deck, Player &p1, Player &p2);
         void addLog(Card &cWinner, Card &cLoser, Player &winner, Player &loser);
-        void addWarLog(std::vector<Card> &cWinner, std::vector<Card> &cLoser, Player &winner, Player &loser);
+        void addWarLog(Player &winner, Player &loser);
         void handleWar(Player p1, Player p2, int cardsToDraws);
 
     public:
