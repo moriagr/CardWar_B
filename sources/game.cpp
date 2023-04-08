@@ -79,6 +79,7 @@ namespace ariel
             }
         }
     }
+    
     void Game::shuffleDesk(std::vector<Card> &deck)
     {
         std::srand(std::time(nullptr));
@@ -93,6 +94,10 @@ namespace ariel
 
     void Game::playTurn()
     {
+        if (p1.stacksize() == 0)
+        {
+            throw std::invalid_argument("We can't play turn beacause no card left");
+        }
         Card card1 = p1.takeCard();
         Card card2 = p2.takeCard();
 
@@ -201,6 +206,10 @@ namespace ariel
     // playes the game until the end
     void Game::playAll()
     {
+        if (p1.stacksize() == 0)
+        {
+            throw std::invalid_argument("We can't play turn beacause no card left");
+        }
         while (p1.stacksize() > 0)
         {
             playTurn();
