@@ -29,8 +29,6 @@ namespace ariel
         }
         shuffleDesk(deck);
         dealCards(deck);
-        // gameOver = false;
-        // p1.printCards();
     }
 
     void Game::addLog(Card &cWinner, Card &cLoser, Player &winner, Player &loser)
@@ -290,45 +288,14 @@ namespace ariel
         }
     }
 
-    // for each player prints basic statistics: win rate, cards won, <other stats you want to print>.
-    // Also print the draw rate and amount of draws that happand. (draw within a draw counts as 2 draws. )
-    // void Game::printStats()
-    // {
-    //     cout << "Player 1: Name : " << p1.getName() << " : " << endl;
-    //     cout << "Win rate:  ";
-    //     if (p1.cardesTaken() > p2.cardesTaken())
-    //     {
-    //         cout << 0.5 << endl;
-    //     }
-    //     else
-    //     {
-    //         cout << 0 << endl;
-    //     }
-    //     p1.printCards(p1.getCardesTaken());
-    //     cout << "Num of cards won: " << p1.cardesTaken() << endl;
-    //     cout << "" << endl;
-
-    //     cout << "Player 2: Name : " << p2.getName() << " : " << endl;
-    //     p2.printCards(p2.getCardesTaken());
-    //     cout << "Win rate:  ";
-
-    //     if (p1.cardesTaken() < p2.cardesTaken())
-    //     {
-    //         cout << 0.5 << endl;
-    //     }
-    //     else
-    //     {
-    //         cout << 0 << endl;
-    //     }
-    //     cout << "" << endl;
-    //     cout << "The amout of draws that happand are: " << countWarDraw << endl;
-    // }
+ 
     void Game::printStats()
     {
         cout << "Player1 stats:" << endl;
 
         cout << " - " << p1.getName() << ":" << endl;
         cout << "   Win rate: " << p1.getWinRate() * 100 << "%" << endl;
+        cout << "   Wins: " << p1.getWinRate() << endl;
         cout << "   Cards won: " << endl;
         p1.printCards(p1.getCardesTaken());
 
@@ -340,6 +307,7 @@ namespace ariel
 
         cout << " - " << p2.getName() << ":" << endl;
         cout << "   Win rate: " << p2.getWinRate() * 100 << "%" << endl;
+        cout << "   Wins: " << p2.getWinRate() << endl;
         cout << "   Cards won: " << endl;
         p2.printCards(p2.getCardesTaken());
 
