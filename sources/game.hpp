@@ -15,22 +15,22 @@ namespace ariel
     class Game
     {
     private:
-        Player p1;
-        Player p2;
+        Player &p1;
+        Player &p2;
         std::vector<Card> centerDeck;
         std::vector<Card> spoilsOfWar;
         std::stack<std::string> turnLog;
         bool gameOver;
         bool war;
-        void initializeGame(Player &p1, Player &p2);
+        void initializeGame();
         void shuffleDesk(std::vector<Card> &deck);
-        void dealCards(std::vector<Card> &deck, Player &p1, Player &p2);
+        void dealCards(std::vector<Card> &deck);
         void addLog(Card &cWinner, Card &cLoser, Player &winner, Player &loser);
         void addWarLog(Player &winner, Player &loser);
-        void handleWar(Player p1, Player p2, int cardsToDraws);
+        // void handleWar(Player p1, Player p2, int cardsToDraws);
 
     public:
-        Game(Player p1_, Player p2_);
+        Game(Player &p1_, Player &p2_);
         void playTurn();
         void printLastTurn();
         void playAll();    // playes the game untill the end

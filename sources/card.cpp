@@ -78,8 +78,7 @@ namespace ariel
         }
     }
 
-
- string Card::suit_to_string()
+    string Card::suit_to_string()
     {
         switch (mySuit)
         {
@@ -102,7 +101,6 @@ namespace ariel
     }
     void Card::printCard()
     {
-        cout << rank_to_string() << endl;
-        cout << suit_to_string() << endl;
+        cout << rank_to_string() << " of :" << suit_to_string() << endl;
     }
 }

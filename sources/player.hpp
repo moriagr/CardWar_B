@@ -21,9 +21,10 @@ namespace ariel
         int cardesTaken();
         string getName();
         void addToTaken(const vector<Card> &cards);
+        void clearWarCards();
         void addCardToStack(const Card &card);
         void addCardToTaken(const Card &card);
-        void printCards();
+        void printCards(const vector<Card> &cards);
         Card takeCard();
         vector<Card> getWarCards();
         void addCardToWar(const Card &card);

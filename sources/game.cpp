@@ -11,12 +11,12 @@ using namespace std;
 
 namespace ariel
 {
-    Game::Game(Player p1_, Player p2_) : p1(p1_), p2(p2_)
+    Game::Game(Player &p1_, Player &p2_) : p1(p1_), p2(p2_)
     {
-        initializeGame(p1, p2);
+        initializeGame();
     }
 
-    void Game::initializeGame(Player &p1, Player &p2)
+    void Game::initializeGame()
     {
         std::vector<Card> deck;
         for (int suit = 0; suit < 4; suit++)
@@ -28,9 +28,9 @@ namespace ariel
             }
         }
         shuffleDesk(deck);
-        dealCards(deck, p1, p2);
-        gameOver = false;
-        p1.printCards();
+        dealCards(deck);
+        // gameOver = false;
+        // p1.printCards();
     }
 
     void Game::addLog(Card &cWinner, Card &cLoser, Player &winner, Player &loser)
@@ -65,7 +65,7 @@ namespace ariel
         turnLog.push(log);
     }
 
-    void Game::dealCards(std::vector<Card> &deck, Player &p1, Player &p2)
+    void Game::dealCards(std::vector<Card> &deck)
     {
         for (std::vector<Card>::size_type i = 0; i < 52; i++)
         {
@@ -79,7 +79,7 @@ namespace ariel
             }
         }
     }
-    
+
     void Game::shuffleDesk(std::vector<Card> &deck)
     {
         std::srand(std::time(nullptr));
@@ -94,6 +94,10 @@ namespace ariel
 
     void Game::playTurn()
     {
+        if (&p1 == &p2)
+        {
+            throw std::invalid_argument("Same player");
+        }
         if (p1.stacksize() == 0)
         {
             throw std::invalid_argument("We can't play turn beacause no card left");
@@ -107,6 +111,7 @@ namespace ariel
             p2.addCardToTaken(card1);
             p2.addCardToTaken(card2);
             addLog(card2, card1, p2, p1);
+            return;
         }
         // Check if player2 got Ace and player1 got 2 - player1 one
         else if (card2.GetRankValue() == 14 && card1.GetRankValue() == 2)
@@ -114,6 +119,7 @@ namespace ariel
             p1.addCardToTaken(card1);
             p1.addCardToTaken(card2);
             addLog(card1, card2, p1, p2);
+            return;
         }
         // Player2 won
         else if (card2.GetRankValue() > card1.GetRankValue())
@@ -121,6 +127,7 @@ namespace ariel
             p2.addCardToTaken(card1);
             p2.addCardToTaken(card2);
             addLog(card2, card1, p2, p1);
+            return;
         }
         // Player1 won
         else if (card2.GetRankValue() < card1.GetRankValue())
@@ -128,6 +135,7 @@ namespace ariel
             p1.addCardToTaken(card1);
             p1.addCardToTaken(card2);
             addLog(card1, card2, p1, p2);
+            return;
         }
 
         // If there is war
@@ -141,44 +149,46 @@ namespace ariel
                 p2.addCardToWar(p2.takeCard());
                 card1 = p1.takeCard();
                 card2 = p2.takeCard();
+                p1.addCardToWar(card1);
+                p2.addCardToWar(card2);
                 // Check if player1 got Ace and player2 got 2 - player2 one
                 if (card1.GetRankValue() == 14 && card2.GetRankValue() == 2)
                 {
-                    p1.addCardToWar(card1);
-                    p2.addCardToWar(card2);
                     addWarLog(p2, p1);
                     p2.addToTaken(p2.getWarCards());
                     p2.addToTaken(p1.getWarCards());
+                    p2.clearWarCards();
+                    p1.clearWarCards();
                     return;
                 }
                 // Check if player2 got Ace and player1 got 2 - player1 one
                 else if (card2.GetRankValue() == 14 && card1.GetRankValue() == 2)
                 {
-                    p1.addCardToWar(card1);
-                    p2.addCardToWar(card2);
                     addWarLog(p1, p2);
                     p1.addToTaken(p1.getWarCards());
                     p1.addToTaken(p2.getWarCards());
+                    p2.clearWarCards();
+                    p1.clearWarCards();
                     return;
                 }
                 // Player2 won
                 else if (card2.GetRankValue() > card1.GetRankValue())
                 {
-                    p1.addCardToWar(card1);
-                    p2.addCardToWar(card2);
                     addWarLog(p2, p1);
                     p2.addToTaken(p2.getWarCards());
                     p2.addToTaken(p1.getWarCards());
+                    p2.clearWarCards();
+                    p1.clearWarCards();
                     return;
                 }
                 // Player1 won
                 else if (card2.GetRankValue() < card1.GetRankValue())
                 {
-                    p1.addCardToWar(card1);
-                    p2.addCardToWar(card2);
                     addWarLog(p1, p2);
                     p1.addToTaken(p1.getWarCards());
                     p1.addToTaken(p2.getWarCards());
+                    p2.clearWarCards();
+                    p1.clearWarCards();
                     return;
                 }
             }
@@ -189,6 +199,8 @@ namespace ariel
                 p1.addCardToTaken(p1.takeCard());
                 p2.addCardToTaken(p2.takeCard());
             }
+            p2.clearWarCards();
+            p1.clearWarCards();
         }
     }
 
@@ -206,6 +218,10 @@ namespace ariel
     // playes the game until the end
     void Game::playAll()
     {
+        if (&p1 == &p2)
+        {
+            throw std::invalid_argument("Same player");
+        }
         if (p1.stacksize() == 0)
         {
             throw std::invalid_argument("We can't play turn beacause no card left");
