@@ -20,8 +20,6 @@ namespace ariel
         std::vector<Card> centerDeck;
         std::vector<Card> spoilsOfWar;
         std::stack<std::string> turnLog;
-        bool gameOver;
-        bool war;
         void initializeGame();
         void shuffleDesk(std::vector<Card> &deck);
         void dealCards(std::vector<Card> &deck);

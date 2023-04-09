@@ -110,6 +110,8 @@ namespace ariel
         {
             p2.addCardToTaken(card1);
             p2.addCardToTaken(card2);
+            p2.increamentWins();
+            p1.increamentLosses();
             addLog(card2, card1, p2, p1);
             return;
         }
@@ -118,6 +120,8 @@ namespace ariel
         {
             p1.addCardToTaken(card1);
             p1.addCardToTaken(card2);
+            p1.increamentWins();
+            p2.increamentLosses();
             addLog(card1, card2, p1, p2);
             return;
         }
@@ -126,6 +130,8 @@ namespace ariel
         {
             p2.addCardToTaken(card1);
             p2.addCardToTaken(card2);
+            p2.increamentWins();
+            p1.increamentLosses();
             addLog(card2, card1, p2, p1);
             return;
         }
@@ -134,6 +140,8 @@ namespace ariel
         {
             p1.addCardToTaken(card1);
             p1.addCardToTaken(card2);
+            p1.increamentWins();
+            p2.increamentLosses();
             addLog(card1, card2, p1, p2);
             return;
         }
@@ -145,6 +153,8 @@ namespace ariel
             p2.addCardToWar(card2);
             while (p1.stacksize() > 1)
             {
+                p1.increamentDraw();
+                p2.increamentDraw();
                 p1.addCardToWar(p1.takeCard());
                 p2.addCardToWar(p2.takeCard());
                 card1 = p1.takeCard();
@@ -159,6 +169,8 @@ namespace ariel
                     p2.addToTaken(p1.getWarCards());
                     p2.clearWarCards();
                     p1.clearWarCards();
+                    p2.increamentWins();
+                    p1.increamentLosses();
                     return;
                 }
                 // Check if player2 got Ace and player1 got 2 - player1 one
@@ -169,6 +181,8 @@ namespace ariel
                     p1.addToTaken(p2.getWarCards());
                     p2.clearWarCards();
                     p1.clearWarCards();
+                    p1.increamentWins();
+                    p2.increamentLosses();
                     return;
                 }
                 // Player2 won
@@ -179,6 +193,8 @@ namespace ariel
                     p2.addToTaken(p1.getWarCards());
                     p2.clearWarCards();
                     p1.clearWarCards();
+                    p2.increamentWins();
+                    p1.increamentLosses();
                     return;
                 }
                 // Player1 won
@@ -189,6 +205,8 @@ namespace ariel
                     p1.addToTaken(p2.getWarCards());
                     p2.clearWarCards();
                     p1.clearWarCards();
+                    p1.increamentWins();
+                    p2.increamentLosses();
                     return;
                 }
             }
@@ -248,6 +266,7 @@ namespace ariel
         }
     }
 
+    // prints all the turns played one line per turn (same format as void printLastTurn())
     void Game::printLog()
     {
         if (turnLog.empty())
@@ -269,9 +288,63 @@ namespace ariel
                 copyStack.pop();
             }
         }
-    } // prints all the turns played one line per turn (same format as void printLastTurn())
+    }
+
+    // for each player prints basic statistics: win rate, cards won, <other stats you want to print>.
+    // Also print the draw rate and amount of draws that happand. (draw within a draw counts as 2 draws. )
+    // void Game::printStats()
+    // {
+    //     cout << "Player 1: Name : " << p1.getName() << " : " << endl;
+    //     cout << "Win rate:  ";
+    //     if (p1.cardesTaken() > p2.cardesTaken())
+    //     {
+    //         cout << 0.5 << endl;
+    //     }
+    //     else
+    //     {
+    //         cout << 0 << endl;
+    //     }
+    //     p1.printCards(p1.getCardesTaken());
+    //     cout << "Num of cards won: " << p1.cardesTaken() << endl;
+    //     cout << "" << endl;
+
+    //     cout << "Player 2: Name : " << p2.getName() << " : " << endl;
+    //     p2.printCards(p2.getCardesTaken());
+    //     cout << "Win rate:  ";
+
+    //     if (p1.cardesTaken() < p2.cardesTaken())
+    //     {
+    //         cout << 0.5 << endl;
+    //     }
+    //     else
+    //     {
+    //         cout << 0 << endl;
+    //     }
+    //     cout << "" << endl;
+    //     cout << "The amout of draws that happand are: " << countWarDraw << endl;
+    // }
     void Game::printStats()
     {
+        cout << "Player1 stats:" << endl;
+
+        cout << " - " << p1.getName() << ":" << endl;
+        cout << "   Win rate: " << p1.getWinRate() * 100 << "%" << endl;
+        cout << "   Cards won: " << endl;
+        p1.printCards(p1.getCardesTaken());
+
+        cout << "   Draw rate: " << p1.getDrawRate() * 100 << "%" << endl;
+        cout << "   Draws: " << p1.getDraws() << endl;
+        // Add any other stats you want to print here
+        cout << "" << endl;
+        cout << "Player2 stats:" << endl;
+
+        cout << " - " << p2.getName() << ":" << endl;
+        cout << "   Win rate: " << p2.getWinRate() * 100 << "%" << endl;
+        cout << "   Cards won: " << endl;
+        p2.printCards(p2.getCardesTaken());
+
+        cout << "   Draw rate: " << p2.getDrawRate() * 100 << "%" << endl;
+        cout << "   Draws: " << p2.getDraws() << endl;
     }
 
     Player Game::getP1()

@@ -28,13 +28,22 @@ namespace ariel
         Card takeCard();
         vector<Card> getWarCards();
         void addCardToWar(const Card &card);
+        vector<Card> getCardesTaken();
+        float getWinRate() const;
+        float getDrawRate() const;
+        int getDraws() const;
+        void increamentWins();
+        void increamentDraw();
+        void increamentLosses();
 
     private:
         string myName;
-        int score;
         vector<Card> myStack;
         vector<Card> myWarCards;
         vector<Card> myTaken;
+        int wins = 0;
+        int losses = 0;
+        int draws = 0;
     };
 }
 #endif
