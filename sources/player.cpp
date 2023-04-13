@@ -36,6 +36,16 @@ namespace ariel
         myWarCards.clear();
     }
 
+    void Player::clearPlayer()
+    {
+        myTaken.clear();
+        myWarCards.clear();
+        myStack.clear();
+        wins = 0;
+        losses = 0;
+        draws = 0;
+    }
+
     vector<Card> Player::getWarCards()
     {
         return myWarCards;

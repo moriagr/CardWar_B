@@ -35,6 +35,7 @@ namespace ariel
         void increamentWins();
         void increamentDraw();
         void increamentLosses();
+        void clearPlayer();
 
     private:
         string myName;

@@ -13,6 +13,8 @@ namespace ariel
 {
     Game::Game(Player &p1_, Player &p2_) : p1(p1_), p2(p2_)
     {
+        p1.clearPlayer();
+        p2.clearPlayer();
         initializeGame();
     }
 
@@ -288,8 +290,7 @@ namespace ariel
         }
     }
 
- 
-    void Game::printStats()
+     void Game::printStats()
     {
         cout << "Player1 stats:" << endl;
 
